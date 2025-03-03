@@ -1,20 +1,56 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      <h1 style="font-weight: 600;" id="page-title">Sample App with ion-datetime component</h1>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" aria-labelledby="page-title">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-sm="12" size-md="6" size-lg="4" class="ion-align-items-center">
+        <form (ngSubmit)="onSubmit()" aria-label="Date selection form">
+          <ion-item>
+            <ion-input autofocus="true" label="Select a date from future" labelId="date-input-label"
+              label-placement="stacked" id="date-input" aria-labelledby="date-input-label"
+              aria-describedby="date-input-description" placeholder="Select Date"
+              [value]="displayDateFormat(selectedDate)" name="selectedDate" readonly></ion-input>
+            <div id="date-input-description" class="sr-only">Click to open a date picker where you can select a future
+              date</div>
+          </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+          <ion-modal trigger="date-input" [keepContentsMounted]="true">
+            <ng-template>
+              <ion-datetime #datetime presentation="date" [(ngModel)]="selectedDate"
+                [ngModelOptions]="{standalone: true}" [min]="minDate" [max]="maxDate" [showDefaultButtons]="true"
+                aria-label="Date picker for selecting a future date" showMonthAndYear="true">
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+
+          <ion-button type="submit" expand="block" aria-label="Submit date selection" class="ion-margin-top">
+            Submit
+          </ion-button>
+        </form>
+
+        @if(showResults) {
+        <div class="results-container ion-margin-top" role="region" aria-labelledby="results-heading"
+          aria-live="polite">
+          <h2 id="results-heading" class="sr-only">Date calculation results</h2>
+          <ion-list class="date-results-list">
+            @for(result of dateResults; track result) {
+            <ion-item>
+              <ion-label class="result">
+                <span class="result-label">{{ result.label }}:</span>
+                <span class="result-value">{{ result.value }}</span>
+              </ion-label>
+            </ion-item>
+            }
+          </ion-list>
+        </div>
+        }
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

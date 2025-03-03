@@ -1,27 +1,39 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
+ion-title h1 {
   margin: 0;
+  padding: 8px 0;
+  text-align: center;
 }
 
-#container a {
-  text-decoration: none;
+.results-container {
+  margin-top: 20px;
+}
+
+.date-results-list {
+  border: 5px solid red;
+  border-radius: 4px;
+
+  .result {
+    --color: blue;
+  }
+
+  .result-label {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
+  .result-value {
+    font-style: italic;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
